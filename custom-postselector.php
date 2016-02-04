@@ -23,35 +23,7 @@ echo '<?'?>xml version="1.0" encoding="UTF-8"?>
         <script type="text/javascript">window.postselector = {nonce:'<?php echo $ajax_nonce ?>',
           ajaxurl:'<?php echo admin_url( 'admin-ajax.php' ) ?>', ids:[]};</script>
 	<link rel="stylesheet" href="<?php echo plugins_url( 'postselector.css', __FILE__ ) ?>" />
-    <style>
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
 
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #111;
-}
-
-.active {
-    background-color: #4CAF50;
-}
-</style>
 </head>
 <body>
 <?php echo "PostSelector / " ?>
@@ -79,28 +51,14 @@ if ( $readonly ) {
 <?php
 }
 }
-// Start the loop.
-while ( have_posts() ) : the_post();
-?>        <script type="text/javascript">window.postselector.ids.push('<?php echo $post->ID; ?>');</script>
-<?php
-if ( ! $readonly ) {
-?>          
-  <p class="title"><input type="button" value="Refresh" id="refresh"/> <input type="submit" value="Save Selection" id="submit-
-  <?php echo $post->ID ?>">
-  </p>
-<?php
-}
-endwhile;
-
-?>        
-
-    
+?>
 
 
 
 
 
-    <svg class="postselector" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 2000" preserveAspectRatio="xMidYMin slice">
+
+    <svg class="postselector" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMin slice">
 	  <line class="lane" x1="333" y1="0" x2="333" y2="1000" />
 	  <line class="lane" x1="667" y1="0" x2="667" y2="1000" />
           <text class="lane" x="167" y="300" text-anchor="middle">No</text>
@@ -111,6 +69,30 @@ endwhile;
              <text class="post" x="10" y="0" dy="1em" width="260" text-overflow="ellipsis">Some text of interest</text>
           </g> -->
         </svg>
+        
+         <?php
+// Start the loop.
+        while ( have_posts() ) : the_post();
+?>        <script type="text/javascript">window.postselector.ids.push('<?php echo $post->ID; ?>');</script>
+<?php
+if ( ! $readonly ) {
+?>          
+  
+  <p class="title"><input type="button" value="Refresh" id="refresh"/> <input type="submit" value="Save Selection" id="submit-
+  <?php echo $post->ID ?>">
+  </p>
+<?php
+}
+endwhile;
+
+?>   
+
+        
+        
         <script src="<?php echo plugins_url( 'postselector.js', __FILE__ ) ?>"></script>
-    </body>
+       
+        
+     
+  </body>
 </html>
+

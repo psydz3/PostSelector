@@ -4,17 +4,23 @@ body.post {
 	background:#f8f8f8; margin:0; overflow:hidden
 }
 svg.postselector {
-	display:block; border:1px solid #ccc; position:absolute;
+	display:block; border:0px solid #ccc; position:relative;
 	width:100%; background:#fff;
 }
 p.title {
-	font: 24px sans-serif;
-	margin-top: 0.1em;
-	margin-bottom: 0.1em;
+	font: 24px verdana;
+	display: flex;
+	
+	justify-content: center;
+	margin: 0.1em auto;
+	width: 8cm;
 }
 p.title > input {
 	font: 16px sans-serif;
+	width: 3cm;
+
 }
+
 line.lane { stroke:1000; stroke-width:2px; stroke-dasharray:10,10 }
 text.lane {
 	font-family: 'Lucida Grande', sans-serif;
@@ -52,3 +58,34 @@ div.content p {
 g.post > image {
 	background: #fff;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+
+
