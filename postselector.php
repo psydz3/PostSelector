@@ -316,6 +316,27 @@ function postselector_save() {
 	}
 	$postselector_status_mode = intval( get_post_meta( $post->ID, '_postselector_status_mode', true ) );
 	if ( STATUS_MODE_PUBLISH == $postselector_status_mode ) {
+		$connection = mysqli_connect('localhost','root','123456','wp_database');
+
+		if (!$connection){
+          die("Invalid Connection" . mysqli_connect_error());
+        }
+
+        $sql = "SELECT ID, Yes, NA, No FROM wp_vote";
+        $result = mysqli_query($connection, $sql);
+        if (mysqli_num_rows($result) > 0){
+          echo '<table>';
+          echo '<tr><th>Options</th><th>Yes</th><th>N/A</th><th>No</th></tr>';
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo '<tr>';# code...
+      
+            echo "<td>".$row["Options"]."</td><td>".$row["Yes"]."</td><td>".$row["NA"]."</td><td>".$row["No"]."</td>";
+      
+            echo '</tr>';
+          }
+          echo '</table>';
+        }
+					
 		if ( ! current_user_can( 'publish_posts' ) ) {
 			// Warning?!
 		} else {
@@ -323,7 +344,7 @@ function postselector_save() {
 				// Check exists??
 				$post = get_post( $pid );
 				if ( null !== $post && 'publish' !== $post->post_status ) {
-					wp_publish_post( $pid );
+					//wp_publish_post( $pid );
 				}
 			}
 		}
@@ -334,7 +355,7 @@ function postselector_save() {
 				// Check exists??
 				$post = get_post( $pid );
 				if ( null !== $post && 'trash' !== $post->post_status ) {
-					wp_delete_post( $pid );
+					//wp_delete_post( $pid );
 				}
 			}
 		}	

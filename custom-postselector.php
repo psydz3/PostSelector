@@ -54,10 +54,6 @@ if ( $readonly ) {
 ?>
 
 
-
-
-
-
     <svg class="postselector" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMin slice">
 	  <line class="lane" x1="333" y1="0" x2="333" y2="1000" />
 	  <line class="lane" x1="667" y1="0" x2="667" y2="1000" />
@@ -82,12 +78,38 @@ if ( ! $readonly ) {
   <?php echo $post->ID ?>">
   </p>
 <?php
+  $connection = mysqli_connect('localhost','root','123456','wp_database');
+
+    if (!$connection){
+          die("Invalid Connection" . mysqli_connect_error());
+        }
+        echo '<table>';
+        echo '<tr><th>Options</th><th>Yes</th><th>N/A</th><th>No</th></tr>';
+          $id = $post->ID;
+        $sql = "SELECT wp_vote.ID, post_title, Yes, NA, No FROM wp_vote, wp_posts WHERE wp_vote.ID = '$id' AND wp_vote.ID = wp_posts.ID";
+        $result = mysqli_query($connection, $sql);
+        if (mysqli_num_rows($result) <= 0){
+          $sql = "INSERT INTO wp_vote ('ID', 'Yes', 'NA', 'No') VALUES ('$id',0,0,0)";
+          //echo $sql;
+          mysqli_query($connection, $sql);
+        }
+          
+          
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo '<tr>';# code...
+      
+            echo "<td>".$row["post_title"]."</td><td>".$row["Yes"]."</td><td>".$row["NA"]."</td><td>".$row["No"]."</td>";
+      
+            echo '</tr>';
+          }
+     
+      echo '</table>';
+?>
+<?php
 }
 endwhile;
 
 ?>   
-
-        
         
         <script src="<?php echo plugins_url( 'postselector.js', __FILE__ ) ?>"></script>
        

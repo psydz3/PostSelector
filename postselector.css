@@ -1,23 +1,23 @@
 /* postselector.css */
-body { background:#fff; margin:0; overflow:hidden }
+body { background:#fff; margin:0; overflow:auto }
 body.post {
-	background:#f8f8f8; margin:0; overflow:hidden
+	background:#f8f8f8; margin:0; overflow:auto
 }
 svg.postselector {
 	display:block; border:0px solid #ccc; position:relative;
 	width:100%; background:#fff;
 }
 p.title {
-	font: 24px verdana;
+	font: 50px times;
 	display: flex;
-	
 	justify-content: center;
-	margin: 0.1em auto;
-	width: 8cm;
+	margin:0.3em auto;
+	width: 13cm;
 }
 p.title > input {
-	font: 16px sans-serif;
+	font: 40px sans-serif;
 	width: 3cm;
+	background-color: #424242；
 
 }
 
@@ -61,10 +61,11 @@ g.post > image {
 
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    padding: auto;
     overflow: hidden;
-    background-color: #333;
+    background-color: #424242;
+    font-size: 22px;
 }
 
 li {
@@ -75,8 +76,9 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px 120px;
     text-decoration: none;
+    margin: auto;
 }
 
 li a:hover:not(.active) {
@@ -84,8 +86,21 @@ li a:hover:not(.active) {
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: #FF9100;
 }
+
+table {
+    width:80%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
 
 
 
