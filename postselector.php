@@ -315,27 +315,12 @@ function postselector_save() {
 		update_post_modified_date( $app->ID );
 	}
 	$postselector_status_mode = intval( get_post_meta( $post->ID, '_postselector_status_mode', true ) );
-	if ( STATUS_MODE_PUBLISH == $postselector_status_mode ) {
 		$connection = mysqli_connect('localhost','root','123456','wp_database');
 
 		if (!$connection){
           die("Invalid Connection" . mysqli_connect_error());
         }
-
-        $sql = "SELECT ID, Yes, NA, No FROM wp_vote";
-        $result = mysqli_query($connection, $sql);
-        if (mysqli_num_rows($result) > 0){
-          echo '<table>';
-          echo '<tr><th>Options</th><th>Yes</th><th>N/A</th><th>No</th></tr>';
-          while ($row = mysqli_fetch_assoc($result)) {
-            echo '<tr>';# code...
-      
-            echo "<td>".$row["Options"]."</td><td>".$row["Yes"]."</td><td>".$row["NA"]."</td><td>".$row["No"]."</td>";
-      
-            echo '</tr>';
-          }
-          echo '</table>';
-        }
+       //if ( STATUS_MODE_PUBLISH == $postselector_status_mode ){} 
 					
 		if ( ! current_user_can( 'publish_posts' ) ) {
 			// Warning?!
@@ -343,8 +328,24 @@ function postselector_save() {
 			foreach ( $choices['selected'] as $pid ) {
 				// Check exists??
 				$post = get_post( $pid );
-				if ( null !== $post && 'publish' !== $post->post_status ) {
-					//wp_publish_post( $pid );
+				 if (null !== $post) {
+                     //wp_publish_post($pid);
+                     $col = "Yes";
+                     $id = $post->ID;
+                     $sql = "SELECT ID, $col FROM wp_vote WHERE ID = '$id'";
+ 
+
+					//echo "test";
+					//echo $sql;
+
+					$result = mysql_query($connection, $sql);
+					while ($row = mysqli_fetch_assoc($result)){
+						$value = (int)$row[$sol] + 1;
+						$sql = "UPDATE wp_vote SET $sol = $value WHERE ID = $id'";
+						echo $sql;
+						mysqli_query($connection, $sql);
+
+					}
 				}
 			}
 		}
@@ -354,12 +355,23 @@ function postselector_save() {
 			} else {
 				// Check exists??
 				$post = get_post( $pid );
-				if ( null !== $post && 'trash' !== $post->post_status ) {
+				if ( null !== $post ){
 					//wp_delete_post( $pid );
+				    $col = "No";
+				    $id = $post->ID;
+				    $sql = "SELECT ID, $col FROM wp_vote WHERE ID = '$id'";
+
+				    $result = mysql_query($connection, $sql);
+				    while ($row = mysqli_fetch_assoc($result)){
+				    	$value =(int)$row[$col] + 1;
+				    	$sql = "UPDATE wp_vote SET $col = $value WHERE ID = '$id'";
+				    	echo $sql;
+				    	mysqli_query($connection, $sql);
+				    }
 				}
 			}
 		}	
-	}
+	
 	header( 'Content-Type: application/json' );
 	echo 'true';
 	wp_die();

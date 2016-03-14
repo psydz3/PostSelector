@@ -321,6 +321,7 @@ $( 'input[type=submit]' ).on('click',function(ev) {
 				if (res == '0' || res == '1' || res.substring( 0,1 ) == '#') {
 					alert( "Sorry, could not save data to wordpress" ); }
 				$( '#' + id ).prop( 'disabled', false );
+				window.location.reload();
 			}
 		});
 	}
