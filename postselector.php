@@ -338,11 +338,11 @@ function postselector_save() {
 					//echo "test";
 					//echo $sql;
 
-					$result = mysql_query($connection, $sql);
+					$result = mysqli_query($connection, $sql);
 					while ($row = mysqli_fetch_assoc($result)){
-						$value = (int)$row[$sol] + 1;
-						$sql = "UPDATE wp_vote SET $sol = $value WHERE ID = $id'";
-						echo $sql;
+						$value = (int)$row[$col] + 1;
+						$sql = "UPDATE wp_vote SET $col = $value WHERE ID = '$id'";
+						//echo $sql;
 						mysqli_query($connection, $sql);
 
 					}
@@ -361,7 +361,7 @@ function postselector_save() {
 				    $id = $post->ID;
 				    $sql = "SELECT ID, $col FROM wp_vote WHERE ID = '$id'";
 
-				    $result = mysql_query($connection, $sql);
+				    $result = mysqli_query($connection, $sql);
 				    while ($row = mysqli_fetch_assoc($result)){
 				    	$value =(int)$row[$col] + 1;
 				    	$sql = "UPDATE wp_vote SET $col = $value WHERE ID = '$id'";

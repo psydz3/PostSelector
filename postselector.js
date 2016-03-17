@@ -177,7 +177,7 @@ function update() {
 		 .attr( "width", function(d) { return d.id == currentSelection ? 196 : 46; } )
 		 .attr( "height", function(d) { return d.id == currentSelection ? 196 : 46; } );
 	trans.selectAll( 'text' )
-		 .attr( "x", function(d) { return d.id == currentSelection ? 200 : 60; } )
+		 .attr( "x", function(d) { return d.id == currentSelection ? 150 : 150; } )
 	// enter
 	var nposts = posts.enter().append( "g" )
 	  .attr( "id", function(d) {return "post" + d.id} )
@@ -188,9 +188,10 @@ function update() {
 	nposts.append( "clipPath" ).attr( "id", function(d) { return "post" + d.id + "-clip" } )
 	.append( "rect" ).attr( "width",300 ).attr( "height",50 );
 	nposts.append( "rect" )
-	  .classed( "post", true ).attr( "width",300 ).attr( "height",50 );
+	  .classed( "post", true ).attr( "width",300 ).attr( "height",50 ).attr("rx", 20)
+         .attr("ry", 20).attr("stroke", "#FF9100");;
 	nposts.append( "text" )
-	  .classed( "post", true ).attr( "width",300 ).attr( "x", 60 )
+	  .classed( "post", true ).attr( "width",300 ).attr( "x",  150).attr("text-anchor", "middle")
 	  .attr( "y", 0 )
 	  .attr( "dy", "1em" )
 	  .attr( "clip-path", function(d) { return "url(#post" + d.id + "-clip)" } )
@@ -249,7 +250,8 @@ function update() {
 				dragSelection = d.id;
 				changed = true;
 				ghost = d3.select( "svg.postselector" ).append( "rect" )
-				.classed( "ghost", true ).attr( "width", 300 ).attr( "height", 50 );
+				.classed("ghost", true).attr("width", 300).attr("height", 50).attr("rx", 20)
+                        .attr("ry", 20);
 			}
 			if (changed) {
 				update(); }

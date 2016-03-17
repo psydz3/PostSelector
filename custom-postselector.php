@@ -30,11 +30,37 @@ echo '<?'?>xml version="1.0" encoding="UTF-8"?>
 <body>
 <?php echo "PostSelector / " ?>
 <?php echo esc_html( the_title()) ?>
+<div id='nav'>
 <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+  <li class=logo><img src=<?php echo plugins_url('logo.png', __FILE__) ?>></li>
+     <div style="float:right">
+         <li>
+             <a href="#Home">
+                 <span>HOME</span>
+             </a>
+ 
+         </li>
+ 
+         <li>
+             <a class=active href="#Vote">
+                 <span>VOTE</span>
+             </a>
+         </li>
+
+         <li>
+            <a href="#Outcome">
+                 <span>OUTCOME</span>
+             </a>
+         </li>
+
+ 
+         <li>
+             <a href="#About">
+                 <span>ABOUT</span>
+             </a>
+         </li>
+     </div>
+ 
 </ul>
 </body>
     </head>
