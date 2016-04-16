@@ -57,7 +57,7 @@ $home_url = site_url();
         </li>
 
         <li>
-            <a href=<?php echo plugins_url('about.php', __FILE__) ?>>
+            <a href=<?php echo plugins_url('about.html', __FILE__) ?>>
                 <span>ABOUT</span>
             </a>
         </li>
