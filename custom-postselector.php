@@ -72,6 +72,44 @@ $home_url = site_url();
 <?php
 $voted = get_post_meta($post->ID, '_postselector_vote_list', true);
 $uid = get_current_user_id();
+if (empty($voted)) {
+     $postselector_input_category = get_post_meta($post->ID, '_postselector_input_category', true);
+ //$posts = array();
+     if ($postselector_input_category) {
+         $postselector_status_mode = intval(get_post_meta($post->ID, '_postselector_status_mode', true));
+ //echo $postselector_status_mode;
+         $include_status = array('publish');
+ 
+         if (STATUS_MODE_PUBLISH == $postselector_status_mode) {
+             $include_status = array('publish', 'pending', 'draft', 'trash');
+         }
+         $args = array(
+             'category' => $postselector_input_category,
+             'post_type' => array('post', 'page', 'anywhere_map_post'),
+             'post_status' => $include_status,
+         );
+ 
+         $ps = get_posts($args);
+ //echo '<table>';
+ //echo '<tr><th>Options</th><th>Yes</th><th>No</th></tr>';
+         $connection = mysqli_connect('localhost', 'root', '123456', 'wp_database');
+         foreach ($ps as $p) {
+             $id = $p->ID;
+             $sql = "SELECT ID FROM wp_vote WHERE ID = '$id'";
+             //echo $sql;
+             $result = mysqli_query($connection, $sql);
+             if (mysqli_num_rows($result) <= 0) {
+                 $sql = "INSERT INTO wp_vote (ID, Yes, NA, No) VALUES ('$id',0,0,0)";
+                 mysqli_query($connection, $sql);
+             } else {
+                 //echo "<p>'$sql'</p>";
+                 $sql = "UPDATE wp_vote SET Yes = 0, NA = 0, No = 0 WHERE ID = '$id'";
+                 mysqli_query($connection, $sql);
+             }
+             //echo $sql;
+         }
+     }
+ }
 if (!in_array($uid, $voted) && current_time("timestamp") < $time_out) { ?>
 
 
@@ -185,6 +223,15 @@ if (!$readonly) {
     if ($v > 1)
          echo "s";
     ?> 
+    </p>
+
+    <p style = "float:left; font-size:30px; font-family:Arial; padding:0px 30px 0px 0px;">
+         <?php
+         $current = current_time("timestamp");
+         if ($current < $time_out)
+             echo human_time_diff($time_out, $current) . " left";
+         else
+             echo "vote ended"; ?>
     </p>
 
 <?php
