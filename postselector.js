@@ -213,7 +213,7 @@ function update() {
             return d.id == currentSelection ? 900 : 300;
         })
         .attr("height", function (d) {
-            return d.id == currentSelection ? 900 : 50;
+            return d.id == currentSelection ? 500 : 50;
         })
 
     trans.selectAll('image')
@@ -225,7 +225,7 @@ function update() {
         });
     trans.selectAll('text')
         .attr("x", function (d) {
-            return d.id == currentSelection ? 150 : 150;
+            return d.id == currentSelection ? 300 : 150;
         })
     // enter
     var nposts = posts.enter().append("g")
@@ -280,7 +280,7 @@ function update() {
             } else {
                 currentSelection = d.id;
                 detail = d3.select(d3.event.currentTarget).append("foreignObject")
-                    .attr("x", 20).attr("y", 200).attr("width", 860).attr("height", 680).style("opacity", 0);
+                    .attr("x", 20).attr("y", 200).attr("width", 860).attr("height", 180).style("opacity", 0);
                 detail.append("xhtml:body").classed("post", true).append("xhtml:div").classed("content", true).html(function (d) {
                     return d.content;
                 });

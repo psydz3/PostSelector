@@ -128,12 +128,12 @@ if ($readonly) {
 ?>
 
 
-    <svg class="postselector" viewBox="0 0 1000 360" preserveAspectRatio="xMidYMin slice">
+    <svg class="postselector" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMin slice">
     <line class="lane" x1="333" y1="0" x2="333" y2="1000"/>
     <line class="lane" x1="667" y1="0" x2="667" y2="1000"/>
-    <text class="lane" x="167" y="200" text-anchor="middle">No</text>
-    <text class="lane" x="500" y="200" text-anchor="middle">?</text>
-    <text class="lane" x="833" y="200" text-anchor="middle">Yes</text>
+    <text class="lane" x="167" y="300" text-anchor="middle">No</text>
+    <text class="lane" x="500" y="300" text-anchor="middle">?</text>
+    <text class="lane" x="833" y="300" text-anchor="middle">Yes</text>
     <!-- <g class"post" transform="translate(10 10)">
        <rect class="post" x="0" y="0" width="280" height="50" rx="5" ry="5" />
        <text class="post" x="10" y="0" dy="1em" width="260" text-overflow="ellipsis">Some text of interest</text>
